@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geeklogin/home.dart';
 
-import 'package:geeklogin/screens/news.dart';
 import 'package:geeklogin/constants/theme.dart';
 
 void main() => runApp(ProviderScope(child: RootScreenWidget()));
@@ -15,11 +15,7 @@ class RootScreenWidget extends StatelessWidget {
             primaryColor: PrimaryColor,
             scaffoldBackgroundColor: ScaffoldBackgroundColor
         ),
-        home: Scaffold(
-          appBar: AppBar(
-            title: const Text('Geeklogin'),
-          ),
-          body: NewsScreen(),
-        ));
+        home: HomeScreenWidget()
+    );
   }
 }
