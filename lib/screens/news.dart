@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:geeklogin/constants/theme.dart';
+import 'package:geeklogin/models/news_item.dart';
 import 'package:geeklogin/services/news_items_service.dart';
 import 'package:geeklogin/screens/news_item.dart';
+import 'package:geeklogin/store/news.dart';
 
 class NewsScreenWidget extends ConsumerWidget {
-  // ignore: top_level_function_literal_block
-  final _fetchItems = FutureProvider((ref) async {
+  final _fetchItems = FutureProvider<List<NewsItem>>((ref) async {
     final NewsService newsService = NewsService();
 
     var result = await newsService.fetchNews();
@@ -31,10 +32,10 @@ class NewsScreenWidget extends ConsumerWidget {
                       child: Card(
                         child: InkWell(
                           onTap: () {
+                            context.read(newsSelectedState).state = news[index];
+
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => NewsItemScreenWidget(
-                                    id: news[index].id,
-                                    title: news[index].title.rendered)));
+                                builder: (context) => NewsItemScreenWidget()));
                           },
                           child: Container(
                               padding: EdgeInsets.all(16.0),
@@ -56,9 +57,11 @@ class NewsScreenWidget extends ConsumerWidget {
                 },
                 itemCount: news.length,
               ),
-          loading: () => Image(
-              image: AssetImage('assets/news_first_load.png'),
-              fit: BoxFit.fill),
+          loading: () => Container(
+              constraints: BoxConstraints.expand(),
+              child: Image(
+                  image: AssetImage('assets/news_first_load.png'),
+                  fit: BoxFit.fill)),
           error: (error, stack) => Center(child: Text('$error'))),
     );
   }
