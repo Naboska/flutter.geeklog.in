@@ -1,0 +1,1 @@
+const String PUBLIC_API_URL = 'https://dayz.geeklog.in/wp-json/wp/v2';
