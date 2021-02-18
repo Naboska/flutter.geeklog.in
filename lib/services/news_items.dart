@@ -7,7 +7,6 @@ import 'package:geeklogin/constants/api.dart';
 class NewsService {
   Future<NewsItem> fetchNewsItem(int id) async {
     final response = await http.get('$PUBLIC_API_URL/posts/$id');
-    print(id);
     switch (response.statusCode) {
       case 200:
         var result = json.decode(response.body);

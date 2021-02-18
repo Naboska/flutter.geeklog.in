@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:html/parser.dart' show parseFragment;
 
 import 'package:geeklogin/constants/theme.dart';
 import 'package:geeklogin/models/news_item.dart';
-import 'package:geeklogin/services/news_items_service.dart';
+import 'package:geeklogin/services/news_items.dart';
 import 'package:geeklogin/screens/news_item.dart';
 import 'package:geeklogin/store/news.dart';
 
@@ -22,11 +23,16 @@ class NewsScreenWidget extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Image(image: AssetImage('assets/logo.png')),
+        title: Center(child: Image(image: AssetImage('assets/logo.png'))),
       ),
       body: items.when(
           data: (news) => ListView.builder(
                 itemBuilder: (context, index) {
+                  final String title =
+                      parseFragment(news[index].title.rendered).text;
+                  final String content =
+                      parseFragment(news[index].excerpt.rendered).text;
+
                   return Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Card(
@@ -44,12 +50,12 @@ class NewsScreenWidget extends ConsumerWidget {
                               child: Column(children: [
                                 Padding(
                                     padding: EdgeInsets.only(bottom: 20),
-                                    child: Text(news[index].title.rendered,
+                                    child: Text(title,
                                         style: TextStyle(
                                             color: NewsTitleColor,
                                             fontSize: 15,
                                             fontWeight: FontWeight.bold))),
-                                Text(news[index].excerpt.rendered,
+                                Text(content,
                                     style: TextStyle(color: NewsTextColor))
                               ])),
                         ),
