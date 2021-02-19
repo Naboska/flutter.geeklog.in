@@ -22,53 +22,52 @@ class NewsScreenWidget extends ConsumerWidget {
     var items = watch(_fetchItems);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Center(child: Image(image: AssetImage('assets/logo.png'))),
-      ),
-      body: items.when(
-          data: (news) => ListView.builder(
-                itemBuilder: (context, index) {
-                  final String title =
-                      parseFragment(news[index].title.rendered).text;
-                  final String content =
-                      parseFragment(news[index].excerpt.rendered).text;
+        appBar: AppBar(
+          title: Center(child: Text('Новости')),
+        ),
+        body: items.when(
+            data: (news) => ListView.builder(
+                  itemBuilder: (context, index) {
+                    final String title =
+                        parseFragment(news[index].title.rendered).text;
+                    final String content =
+                        parseFragment(news[index].excerpt.rendered).text;
 
-                  return Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Card(
-                        child: InkWell(
-                          onTap: () {
-                            context.read(newsSelectedState).state = news[index];
+                    return Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Card(
+                          child: InkWell(
+                            onTap: () {
+                              context.read(newsSelectedState).state =
+                                  news[index];
 
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => NewsItemScreenWidget()));
-                          },
-                          child: Container(
-                              padding: EdgeInsets.all(16.0),
-                              decoration:
-                                  BoxDecoration(color: NewsBackgroundColor),
-                              child: Column(children: [
-                                Padding(
-                                    padding: EdgeInsets.only(bottom: 20),
-                                    child: Text(title,
-                                        style: TextStyle(
-                                            color: NewsTitleColor,
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold))),
-                                Text(content,
-                                    style: TextStyle(color: NewsTextColor))
-                              ])),
-                        ),
-                      ));
-                },
-                itemCount: news.length,
-              ),
-          loading: () => Container(
-              constraints: BoxConstraints.expand(),
-              child: Image(
-                  image: AssetImage('assets/news_first_load.png'),
-                  fit: BoxFit.fill)),
-          error: (error, stack) => Center(child: Text('$error'))),
-    );
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) =>
+                                      NewsItemScreenWidget()));
+                            },
+                            child: Container(
+                                padding: EdgeInsets.all(16.0),
+                                decoration:
+                                    BoxDecoration(color: NewsBackgroundColor),
+                                child: Column(children: [
+                                  Padding(
+                                      padding: EdgeInsets.only(bottom: 20),
+                                      child: Text(title,
+                                          style: TextStyle(
+                                              color: NewsTitleColor,
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold))),
+                                  Text(content,
+                                      style: TextStyle(color: NewsTextColor))
+                                ])),
+                          ),
+                        ));
+                  },
+                  itemCount: news.length,
+                ),
+            loading: () => Container(
+                constraints: BoxConstraints.expand(),
+                child: Center(child: CircularProgressIndicator())),
+            error: (error, stack) => Center(child: Text('$error'))));
   }
 }

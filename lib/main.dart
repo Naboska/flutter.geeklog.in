@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geeklogin/home.dart';
 
 import 'package:geeklogin/constants/theme.dart';
+import 'package:geeklogin/widgets/navigate.dart';
+import 'package:geeklogin/widgets/router.dart';
 
 void main() => runApp(ProviderScope(child: RootScreenWidget()));
 
@@ -15,7 +16,10 @@ class RootScreenWidget extends StatelessWidget {
             primaryColor: PrimaryColor,
             scaffoldBackgroundColor: ScaffoldBackgroundColor
         ),
-        home: HomeScreenWidget()
+        home: Scaffold(
+          body: RouterWidget(),
+          bottomNavigationBar: NavigateWidget(),
+        )
     );
   }
 }

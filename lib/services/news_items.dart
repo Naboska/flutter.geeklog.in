@@ -5,21 +5,8 @@ import 'package:geeklogin/models/news_item.dart';
 import 'package:geeklogin/constants/api.dart';
 
 class NewsService {
-  Future<NewsItem> fetchNewsItem(int id) async {
-    final response = await http.get('$PUBLIC_API_URL/posts/$id');
-    switch (response.statusCode) {
-      case 200:
-        var result = json.decode(response.body);
-        return NewsItem.fromJson(result);
-      case 404:
-        throw Exception('Ошибка получения 404');
-      default:
-        throw Exception('Ошибка получения.');
-    }
-  }
-
   Future<List<NewsItem>> fetchNews() async {
-    final response = await http.get('$PUBLIC_API_URL/posts');
+    final response = await http.get('$PUBLIC_API_URL/posts?categories=5');
 
     switch (response.statusCode) {
       case 200:
