@@ -1,4 +1,4 @@
-class NewsItem {
+class Post {
   int id;
   String date;
   String dateGmt;
@@ -24,7 +24,7 @@ class NewsItem {
   List<Null> tags;
   Links lLinks;
 
-  NewsItem(
+  Post(
       {this.id,
         this.date,
         this.dateGmt,
@@ -50,7 +50,7 @@ class NewsItem {
         this.tags,
         this.lLinks});
 
-  NewsItem.fromJson(Map<String, dynamic> json) {
+  Post.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     date = json['date'];
     dateGmt = json['date_gmt'];

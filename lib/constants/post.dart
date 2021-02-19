@@ -1,0 +1,2 @@
+const int NEWS_POST_CATEGORY = 5;
+const int GUIDES_POST_CATEGORY = 6;

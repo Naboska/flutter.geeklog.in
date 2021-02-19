@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:geeklogin/store/navigate.dart';
 import 'package:geeklogin/screens/home.dart';
 import 'package:geeklogin/screens/news.dart';
-import 'package:geeklogin/store/navigate.dart';
+import 'package:geeklogin/screens/guides.dart';
 
 class RouterWidget extends ConsumerWidget {
   @override
@@ -14,6 +15,8 @@ class RouterWidget extends ConsumerWidget {
     switch (navigateIndex) {
       case 1:
         return NewsScreenWidget();
+      case 2:
+        return GuidesScreenWidget();
       default:
         return HomeScreenWidget();
     }

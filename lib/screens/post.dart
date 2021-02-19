@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:html/parser.dart' show parseFragment;
 
-import 'package:geeklogin/store/news.dart';
+import 'package:geeklogin/store/post.dart';
 
-class NewsItemScreenWidget extends StatelessWidget {
+class PostScreenWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var newsItem = context.read(newsSelectedState).state;
+    var newsItem = context.read(postState).state;
 
     final String title = parseFragment(newsItem.title.rendered).text;
     final newsBody = parseFragment(newsItem.content.rendered).children;

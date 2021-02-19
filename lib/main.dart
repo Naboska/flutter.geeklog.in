@@ -14,6 +14,7 @@ class RootScreenWidget extends StatelessWidget {
         theme: ThemeData(
             brightness: Brightness.dark,
             primaryColor: PrimaryColor,
+            accentColor: PrimaryColor,
             scaffoldBackgroundColor: ScaffoldBackgroundColor
         ),
         home: Scaffold(
