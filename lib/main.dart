@@ -5,6 +5,7 @@ import 'package:geeklogin/constants/theme.dart';
 import 'package:geeklogin/widgets/navigate.dart';
 import 'package:geeklogin/widgets/router.dart';
 
+
 void main() => runApp(ProviderScope(child: RootScreenWidget()));
 
 class RootScreenWidget extends StatelessWidget {
@@ -15,12 +16,10 @@ class RootScreenWidget extends StatelessWidget {
             brightness: Brightness.dark,
             primaryColor: PrimaryColor,
             accentColor: PrimaryColor,
-            scaffoldBackgroundColor: ScaffoldBackgroundColor
-        ),
+            scaffoldBackgroundColor: ScaffoldBackgroundColor),
         home: Scaffold(
           body: RouterWidget(),
           bottomNavigationBar: NavigateWidget(),
-        )
-    );
+        ));
   }
 }

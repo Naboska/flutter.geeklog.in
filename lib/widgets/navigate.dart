@@ -21,8 +21,8 @@ class NavigateWidget extends ConsumerWidget {
           label: 'Новости',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.school),
-          label: 'Гайды',
+          icon: Icon(Icons.chat),
+          label: 'Чат',
         ),
       ],
       currentIndex: navigateIndex,
